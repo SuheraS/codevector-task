@@ -6,7 +6,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore"
+    )
 
     database_url: str | None = Field(default=None, validation_alias="DATABASE_URL")
     default_page_size: int = 20
@@ -22,11 +26,14 @@ settings = get_settings()
 
 
 def get_database_url() -> str:
-    if settings.database_url:
-        return settings.database_url
+    # Prefer pydantic-loaded value first
+    url = settings.database_url or getenv("DATABASE_URL")
 
-    database_url = getenv("DATABASE_URL")
-    if database_url:
-        return database_url
+    if not url:
+        raise RuntimeError("DATABASE_URL is required")
 
-    raise RuntimeError("DATABASE_URL is required")
+    # 🔥 CRITICAL FIX: force SQLAlchemy to use psycopg v3 (NOT psycopg2)
+    if url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+psycopg://")
+
+    return url
