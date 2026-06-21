@@ -1,0 +1,238 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f1ea;
+  --panel: rgba(255, 255, 255, 0.82);
+  --panel-border: rgba(32, 27, 20, 0.1);
+  --text: #201915;
+  --muted: #6a5d55;
+  --accent: #8f5d3a;
+  --accent-strong: #6e4528;
+  --shadow: 0 24px 80px rgba(60, 40, 20, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(143, 93, 58, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(72, 97, 78, 0.14), transparent 24%),
+    linear-gradient(180deg, #fffaf4 0%, var(--bg) 100%);
+}
+
+.shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-strong);
+  font: 700 0.72rem/1.2 "Arial Narrow", Arial, sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 0.96;
+  max-width: 10ch;
+}
+
+.lede {
+  margin: 18px 0 0;
+  max-width: 68ch;
+  color: var(--muted);
+  font: 1rem/1.65 Arial, sans-serif;
+}
+
+.stats {
+  display: grid;
+  gap: 12px;
+}
+
+.stat-card,
+.panel {
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+
+.stat-card {
+  border-radius: 18px;
+  padding: 18px 20px;
+}
+
+.stat-card span,
+.meta span,
+.cursor-block span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font: 700 0.72rem/1 Arial, sans-serif;
+}
+
+.stat-card strong,
+.meta strong {
+  font: 700 1.1rem/1.2 Arial, sans-serif;
+}
+
+.panel {
+  border-radius: 24px;
+  padding: 18px;
+}
+
+.controls,
+.meta,
+.footer-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.controls {
+  grid-template-columns: 1fr 180px 140px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  font: 700 0.85rem/1.2 Arial, sans-serif;
+  color: var(--muted);
+}
+
+input,
+select,
+button {
+  border-radius: 14px;
+  border: 1px solid rgba(32, 25, 21, 0.12);
+  min-height: 48px;
+  padding: 0 14px;
+  font: inherit;
+}
+
+input,
+select {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+  background: linear-gradient(180deg, #a96d45, var(--accent-strong));
+  color: #fff;
+  font: 700 0.95rem/1 Arial, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+button.secondary {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+}
+
+.meta {
+  align-items: center;
+}
+
+.table-wrap {
+  overflow: auto;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: rgba(248, 243, 236, 0.96);
+  text-align: left;
+  padding: 16px 18px;
+  font: 700 0.76rem/1 Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid rgba(32, 27, 20, 0.08);
+}
+
+tbody td {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(32, 27, 20, 0.08);
+  font: 0.96rem/1.35 Arial, sans-serif;
+}
+
+tbody tr:hover {
+  background: rgba(143, 93, 58, 0.05);
+}
+
+.right {
+  text-align: right;
+}
+
+.footer-bar {
+  align-items: center;
+}
+
+.cursor-block code {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  overflow: auto;
+  font: 0.82rem/1.5 "SFMono-Regular", Consolas, monospace;
+  color: #433128;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .controls,
+  .meta,
+  .footer-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    justify-content: stretch;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+}

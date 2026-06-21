@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeVector Products Browser</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">FastAPI + PostgreSQL + keyset pagination</p>
+          <h1>Browse 200,000 products without OFFSET drift.</h1>
+          <p class="lede">
+            Stable browsing by <strong>updated_at DESC</strong> and <strong>id DESC</strong>, with a snapshot cursor so
+            new writes do not duplicate or skip rows.
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <span>Route</span>
+            <strong>/products</strong>
+          </div>
+          <div class="stat-card">
+            <span>Sort</span>
+            <strong>updated_at, id</strong>
+          </div>
+          <div class="stat-card">
+            <span>Mode</span>
+            <strong>Cursor paging</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel controls">
+        <label>
+          Category
+          <select id="category">
+            <option value="">All categories</option>
+            <option value="electronics">electronics</option>
+            <option value="fashion">fashion</option>
+            <option value="home">home</option>
+            <option value="sports">sports</option>
+            <option value="beauty">beauty</option>
+            <option value="books">books</option>
+            <option value="toys">toys</option>
+            <option value="groceries">groceries</option>
+          </select>
+        </label>
+
+        <label>
+          Page size
+          <input id="limit" type="number" min="1" max="100" value="20" />
+        </label>
+
+        <button id="refresh">Refresh</button>
+      </section>
+
+      <section class="panel meta">
+        <div><span>Snapshot</span><strong id="snapshot">-</strong></div>
+        <div><span>Visible rows</span><strong id="visible">0</strong></div>
+        <div><span>Has more</span><strong id="hasMore">-</strong></div>
+      </section>
+
+      <section class="panel table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th class="right">Price</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+
+      <section class="panel footer-bar">
+        <div class="cursor-block">
+          <span>Cursor</span>
+          <code id="cursor">-</code>
+        </div>
+        <div class="buttons">
+          <button id="prev" class="secondary">Previous</button>
+          <button id="next">Next</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
