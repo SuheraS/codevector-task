@@ -2,6 +2,6 @@ services:
   - type: web
     name: codevector-products-api
     env: python
-    buildCommand: pip install -e .
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     autoDeploy: true
